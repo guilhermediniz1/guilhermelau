@@ -1,0 +1,98 @@
+<html>
+
+<head>
+	<title>Guilherme Láu</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body>
+	<main class="layout">
+		<aside class="sidebar">
+			<div class="sidebar__section sidebar__section--info">
+				<p class="sidebar__section-title">Profile Info</p>
+				<p class="sidebar__name">GUILHERME LÁU</p>
+				<div class="sidebar__details">
+					<table>
+						<tr class="sidebar__detail">
+							<td>&gt;&gt;</td>
+							<td>AGE</td>
+							<td>:</td>
+							<td class="sidebar__detail--danger">&lt;null&gt;</td>
+						</tr>
+						<tr class="sidebar__detail">
+							<td>&gt;&gt;</td>
+							<td>ROLE</td>
+							<td>:</td>
+							<td>Fullstack SWE</td>
+						</tr>
+						<tr class="sidebar__detail">
+							<td>&gt;&gt;</td>
+							<td>EXPERIENCE</td>
+							<td>:</td>
+							<td>+3 YEARS</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+			<div class="sidebar__section sidebar__section--activity">
+				<p class="sidebar__section-title">Recent Activity</p>
+				<div class="sidebar__activities">
+					<div>
+						<h5>Total</h5>
+						<p>19</p>
+					</div>
+					<div>
+						<h5>Total</h5>
+						<p>19</p>
+					</div>
+					<div>
+						<h5>Total</h5>
+						<p>19</p>
+					</div>
+				</div>
+				<div id="activity"></div>
+
+			</div>
+
+			<div class="sidebar__section sidebar__section--misc">
+				<p class="sidebar__section-title">tesdads</p>
+			</div>
+		</aside>
+
+		<section class="main">
+			<span></span>
+			<div class="main__content"></div>
+		</section>
+	</main>
+	<script>
+		const username = "guilhermediniz1";
+		const activityList = document.getElementById("activity");
+
+		fetch(`https://api.github.com/users/${username}/events/public`)
+			.then(response => response.json())
+			.then(events => {
+				console.log(events)
+				events.slice(0, 5).forEach(event => {
+					let li = document.createElement("li");
+
+					let eventType = event.type.replace("Event", "");
+					let repoName = event.repo.name;
+					let url = `https://github.com/${repoName}`;
+
+					li.innerHTML = `<strong>${eventType}</strong> in <a href="${url}" target="_blank">${repoName}</a>`;
+					activityList.appendChild(li);
+				});
+			})
+			.catch(err => {
+				console.error(err);
+				activityList.innerHTML = "<li>Could not load activity.</li>";
+			});
+	</script>
+</body>
+
+
+</html>
