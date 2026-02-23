@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-paper text-ink font-sans;
+  }
+}
+
+@layer components {
+  .prose h2 {
+    @apply text-xl font-bold uppercase tracking-wide mt-10 mb-3;
+  }
+
+  .prose h3 {
+    @apply text-lg font-bold uppercase tracking-wide mt-8 mb-2;
+  }
+
+  .prose p {
+    @apply text-base leading-relaxed mb-4 text-ink;
+  }
+
+  .prose a {
+    @apply underline underline-offset-2 hover:text-ink-muted transition-colors;
+  }
+
+  .prose ul {
+    @apply list-disc pl-6 mb-4 space-y-1;
+  }
+
+  .prose blockquote {
+    @apply border-l-2 border-ink-faint pl-4 italic text-ink-muted my-6;
+  }
+}
